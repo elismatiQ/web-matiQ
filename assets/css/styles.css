@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+:root {
+	--fluid-min-width: 320;
+	--fluid-max-width: 1500;
+	--fluid-min-size: 17;
+	--fluid-max-size: 20;
+	--fluid-min-ratio: 1.2;
+	--fluid-max-ratio: 1.33;
+	--fluid-screen: 100vw;
+	--fluid-bp: calc((var(--fluid-screen) - ((var(--fluid-min-width) / 16) * 1rem)) / ((var(--fluid-max-width) / 16) - (var(--fluid-min-width) / 16)));
+
+	--fluid-min-scale-0: var(--fluid-min-ratio);
+	--fluid-min-scale-1: var(--fluid-min-scale-0) * var(--fluid-min-ratio);
+	--fluid-min-scale-2: var(--fluid-min-scale-1) * var(--fluid-min-ratio);
+  
+	--fluid-max-scale-0: var(--fluid-max-ratio);
+	--fluid-max-scale-1: var(--fluid-max-scale-0) * var(--fluid-max-ratio);
+	--fluid-max-scale-2: var(--fluid-max-scale-1) * var(--fluid-max-ratio);
+  
+	--fluid-min-size-0: (var(--fluid-min-size)) / 16;
+	--fluid-min-size-1: (var(--fluid-min-size) * var(--fluid-min-scale-0)) / 16;
+	--fluid-min-size-2: (var(--fluid-min-size) * var(--fluid-min-scale-1)) / 16;
+  
+	--fluid-max-size-0: (var(--fluid-max-size)) / 16;
+	--fluid-max-size-1: (var(--fluid-max-size) * var(--fluid-max-scale-0)) / 16;
+	--fluid-max-size-2: (var(--fluid-max-size) * var(--fluid-max-scale-1)) / 16;
+  
+	--fluid-0: calc(((var(--fluid-min-size-0) * 1rem) + (var(--fluid-max-size-0) - var(--fluid-min-size-0)) * var(--fluid-bp)));
+	--fluid-1: calc(((var(--fluid-min-size-1) * 1rem) + (var(--fluid-max-size-1) - var(--fluid-min-size-1)) * var(--fluid-bp)));
+	--fluid-2: calc(((var(--fluid-min-size-2) * 1rem) + (var(--fluid-max-size-2) - var(--fluid-min-size-2)) * var(--fluid-bp)));
+  
+	--font-plain: Lato, sans-serif;
+    --font-special: Montserrat, sans-serif;
+    --font-mono: Menlo, monospace;
+    --color-dark: #050505;
+    --color-darkish: #404040;
+    --color-lightish: #e6e6e6;
+    --color-light: #fafafa;
+    --color-mid: grey;
+
+	/* --ratio: var(var(--fluid-max-ratio));
+    --s-5: calc(var(--s0)/var(--ratio)/var(--ratio)/var(--ratio)/var(--ratio)/var(--ratio));
+    --s-4: calc(var(--s0)/var(--ratio)/var(--ratio)/var(--ratio)/var(--ratio));
+    --s-3: calc(var(--s0)/var(--ratio)/var(--ratio)/var(--ratio));
+    --s-2: calc(var(--s0)/var(--ratio)/var(--ratio));
+    --s-1: calc(var(--s0)/var(--ratio));
+    --s0: 1rem;
+    --s1: calc(var(--s0)*var(--ratio));
+    --s2: calc(var(--s0)*var(--ratio)*var(--ratio));
+    --s3: calc(var(--s0)*var(--ratio)*var(--ratio)*var(--ratio));
+    --s4: calc(var(--s0)*var(--ratio)*var(--ratio)*var(--ratio)*var(--ratio));
+    --s5: calc(var(--s0)*var(--ratio)*var(--ratio)*var(--ratio)*var(--ratio)*var(--ratio)); */
+
+	--measure: 65ch;
+    --line-height: var(--ratio);
+    --line-height-small: calc(0.8*var(--ratio));
+    --border-thin: var(--s-5);
+    --border-thick: var(--s-2);
+
+	line-height: var(--ratio);
+    font-size: calc(.333vw + 1em);
+    font-family: var(--font-plain);
+    background-color: var(--color-light);
+    color: var(--color-dark)
+}
+
+@media screen and (min-width: 1500px) {
+	:root {
+	  --fluid-screen: calc(var(--fluid-max-width) * 1px);
+	}
+}
+
+
+/***********
+ *
+ * Resets
+ *
+ ***********/
+/* Box sizing rules */
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+blockquote,
+body,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+p {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Set core root defaults */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+
+	*,
+	*::after,
+	*::before {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/***********
+ *
+ * Primitives
+ * 01. Box
+ * 02. Stack
+ * 03. Center
+ * 04. Cluster
+ * 05. Sidebar
+ * 06. Switcher
+ * 07. Cover
+ * 08. Grid
+ * 09. Frame
+ * 10. Reel
+ * 11. Imposter
+ ***********/
+/* 01. Box */
+box-l {
+	display: block;
+	padding: var(--s1);
+	border-width: var(--border-thin);
+	/* ↓ For high contrast mode */
+	outline: var(--border-thin) solid transparent;
+	outline-offset: calc(var(--border-thin) * -1);
+}
+
+/* 02. Stack */
+stack-l {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+stack-l>*+* {
+	margin-top: var(--s1);
+}
+
+/* 03. Center */
+center-l {
+	display: block;
+	box-sizing: content-box;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--measure);
+}
+
+/* 04. Cluster */
+cluster-l>* {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin: calc(var(--s1) / 2 * -1);
+}
+
+cluster-l>*>* {
+	margin: calc(var(--s1) / 2);
+}
+
+/* 05. Sidebar */
+sidebar-l>* {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+sidebar-l>*>* {
+	flex-grow: 1;
+}
+
+/* 06. Switcher */
+switcher-l {
+	display: block;
+}
+
+switcher-l>* {
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+
+switcher-l>*>* {
+	flex-basis: calc((var(--measure) - 100%) * 999);
+	flex-grow: 1;
+}
+
+/* 07. Cover */
+cover-l {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	padding: var(--s1);
+}
+
+/* 08. Grid */
+grid-l {
+	display: grid;
+	grid-gap: var(--s1);
+	align-content: start;
+	grid-template-columns: 100%;
+}
+
+/* 09. Frame */
+frame-l {
+	display: block;
+	position: relative;
+	padding-bottom: calc(6 / 9 * 100%);
+}
+
+frame-l>* {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+frame-l>img,
+frame-l>video {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+/* 10. Reel */
+reel-l {
+	display: flex;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-color: var(--color-light) var(--color-dark);
+}
+
+reel-l>* {
+	flex: 0 0 var(--item-width);
+}
+
+reel-l>img {
+	height: 100%;
+	flex-basis: auto;
+	width: auto;
+}
+
+reel-l::-webkit-scrollbar {
+	height: 1rem;
+}
+
+reel-l::-webkit-scrollbar-track {
+	background-color: var(--color-dark);
+}
+
+reel-l::-webkit-scrollbar-thumb {
+	background-color: var(--color-dark);
+	background-image: linear-gradient(var(--color-dark) 0, var(--color-dark) 0.25rem, var(--color-light) 0.25rem, var(--color-light) 0.75rem, var(--color-dark) 0.75rem);
+}
+
+/* 11. Imposter */
+imposter-l {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 12. Icon */
+icon-l svg {
+	height: 0.75em;
+	height: 1cap;
+	width: 0.75em;
+	width: 1cap;
+}
